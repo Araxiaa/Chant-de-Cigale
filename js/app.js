@@ -94,7 +94,7 @@
       ${nodes}
       <clipPath id="cc"><circle cx="${cxs}" cy="${cys}" r="34"/></clipPath>
       <circle cx="${cxs}" cy="${cys}" r="38" class="core"/>
-      <image href="assets/cigale.webp" x="${cxs - 76}" y="${cys - 46}" width="152" height="91" clip-path="url(#cc)" preserveAspectRatio="xMidYMid slice"/></svg>`;
+      <image href="assets/cigale-cut.webp" x="${cxs - 76}" y="${cys - 46}" width="152" height="91" clip-path="url(#cc)" preserveAspectRatio="xMidYMid slice"/></svg>`;
   }
 
   /* ───────── Briques de contenu ───────── */

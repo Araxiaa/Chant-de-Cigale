@@ -46,9 +46,10 @@ h1, h2, h3 { font-weight: 500; margin: 0; }
 
 /* ───── Scène ───── */
 .stage { position: fixed; inset: 0; z-index: 1; display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; padding: 38px 78px 34px 42px; }
-.chip { position: fixed; top: 8px; z-index: 30; font: 500 .95rem var(--caps); color: #eadccb; background: rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.2); padding: 4px 14px; border-radius: 99px; cursor: pointer; backdrop-filter: blur(4px); }
+.chip { position: fixed; top: 8px; z-index: 30; font: 500 .95rem var(--caps); color: #eadccb; background: rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.2); padding: 4px 14px; border-radius: 99px; cursor: pointer; }
 .chip:hover { background: rgba(0,0,0,.45); }
-.chip-toc { left: 14px; } .chip-season { right: 14px; font-size: 1.1rem; }
+.chip { text-decoration: none; }
+.chip-toc { left: 14px; } .chip-admin { left: 128px; opacity: .75; } .chip-admin:hover { opacity: 1; } .chip-season { right: 14px; font-size: 1.1rem; }
 
 .book { position: relative; width: min(1180px, 100%); height: min(800px, 100%); display: grid; grid-template-columns: 1fr 1fr; perspective: 2600px; }
 .book::before { content: ''; position: absolute; inset: -16px -18px; z-index: -1; border-radius: 14px;
@@ -83,15 +84,15 @@ h1, h2, h3 { font-weight: 500; margin: 0; }
 .plate { margin: 18px 0 8px; width: min(100%, 420px); padding: 12px; background: var(--paper-2); border: 1px solid var(--taupe); box-shadow: 0 6px 16px rgba(60,40,25,.25); transform: rotate(-.7deg); position: relative; }
 .plate::before { content: ''; position: absolute; inset: 5px; border: 1px dashed var(--taupe); pointer-events: none; }
 .plate figcaption { font: italic 1.05rem var(--serif); color: var(--ink-soft); padding-top: 8px; }
-.portrait { width: 100%; aspect-ratio: 1; background: url(../assets/cigale.webp) no-repeat; background-size: var(--z) auto; background-position: var(--p); mix-blend-mode: multiply; transition: filter 1s; }
+.portrait { width: 100%; aspect-ratio: 1; background: url(../assets/cigale-cut.webp) no-repeat; background-size: var(--z) auto; background-position: var(--p); }
 [data-season=snow] .portrait { filter: saturate(.55) contrast(1.05); }
 .hand { font: 700 1.55rem/1.15 var(--hand); color: var(--ink-soft); margin: 14px 0 0; max-width: 340px; transform: rotate(-1.5deg); }
 .folio { margin-top: auto; font-family: var(--caps); color: var(--ink-soft); letter-spacing: .15em; font-size: 1rem; }
 .scene { background: color-mix(in srgb, var(--paper-2) 60%, var(--rose)); overflow: hidden; }
 .moor, .constel { width: 100%; display: block; }
-.moon { fill: #f6efd8; } .moon-halo { fill: var(--eye); opacity: .25; animation: pulse 5s ease-in-out infinite alternate; }
-.stars circle { fill: var(--paper); opacity: .8; animation: twinkle 3s ease-in-out infinite alternate; }
-.stars circle:nth-child(odd) { animation-delay: -1.5s; }
+.moon { fill: #f6efd8; } .moon-halo { fill: var(--eye); opacity: .28; }
+.stars circle { fill: var(--paper); opacity: .8; }
+.stars circle:nth-child(5n) { animation: twinkle 3s ease-in-out infinite alternate; }
 .h3 { fill: var(--taupe); } .h2 { fill: var(--ink-soft); opacity: .8; } .h1 { fill: var(--ink); opacity: .75; }
 .tufts path { stroke: var(--paper-2); stroke-width: 1.5; fill: none; opacity: .6; }
 [data-season=snow] .moon-halo { fill: #fff; }
@@ -251,6 +252,7 @@ h1, h2, h3 { font-weight: 500; margin: 0; }
 
 /* ───── Mobile ───── */
 @media (max-width: 900px) {
+  .chip-admin { left: 124px; }
   body { font-size: 1.12rem; }
   .stage { padding: 42px 8px 66px; }
   .book { grid-template-columns: 1fr; height: 100%; }
@@ -264,6 +266,8 @@ h1, h2, h3 { font-weight: 500; margin: 0; }
   .tabs a.on, .tabs a:hover { transform: translateY(-5px); }
   .ribbons { top: 6px; left: 8px; right: 8px; gap: 6px; overflow-x: auto; z-index: 8; }
   .ribbons a { width: auto; flex: 1; padding: 6px 8px; clip-path: none; border-radius: 99px; transform: none !important; font-size: .82rem; filter: none; white-space: nowrap; }
+  .ribbons { align-items: flex-start; }
+  .ribbons a.on { padding-bottom: 6px; }
   .ribbons a:not(.on) { opacity: .7; }
   .leaf.fwd { left: 0; width: 100%; }
   .mobile-only { display: block; width: 62%; max-width: 260px; margin: 0 auto 4px; }
@@ -272,3 +276,11 @@ h1, h2, h3 { font-weight: 500; margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; }
 }
+
+/* Performance : le contenu cloné dans la feuille qui tourne reste figé */
+.leaf { will-change: transform; }
+.face * { animation: none !important; transition: none !important; }
+.face .rv, .face .cn, .face .ink { opacity: 1 !important; clip-path: none !important; }
+.lav span, .bunch span { will-change: transform; }
+.rp-scroll { contain: layout paint; }
+.modal { backdrop-filter: none; }
