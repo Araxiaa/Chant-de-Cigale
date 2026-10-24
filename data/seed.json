@@ -1,0 +1,280 @@
+{
+  "content": {
+    "home": {
+      "tagline": "Guérisseuse du Clan du Vent",
+      "intro": "Voici le carnet de Chant de Cigale, jeune guérisseuse d'un clan qui a tout traversé : le Grand Blanc, la faim, le silence des ancêtres.\n\nTournez les pages. Chaque feuille garde un morceau d'elle.",
+      "quote": "Elle avance dans la vie la tête haute, sans jamais détourner le regard."
+    },
+    "identity": {
+      "credits": "Illustration : @araxia.",
+      "fields": [
+        { "label": "Joueur", "value": "Lavnd.13" },
+        { "label": "Lunes", "value": "13 lunes" },
+        { "label": "Clan", "value": "Clan du Vent" },
+        { "label": "Rang", "value": "Guérisseuse" },
+        { "label": "Sexe", "value": "Femelle" },
+        { "label": "Orientation", "value": "Lesbienne" }
+      ],
+      "names": [
+        { "stage": "Chaton", "name": "Petite Cigale", "note": "Pour perpétuer un héritage familial, Harmonie des Prés, sa mère, la nomma d'après les petites bêtes et insectes de la lande que beaucoup dans la famille portent." },
+        { "stage": "Apprentie", "name": "Nuage de Cigale", "note": "" },
+        { "stage": "Adulte", "name": "Chant de Cigale", "note": "Guerrière ou guérisseuse : le préfixe « Chant » lui vient de sa voix chantante et agréable." },
+        { "stage": "Cheffe", "name": "Étoile de Cigale", "note": "" },
+        { "stage": "Ancienne", "name": "Chant de Cigale", "note": "" }
+      ]
+    },
+    "personality": {
+      "summary": "Chant de Cigale est une chatte qui avance dans la vie la tête haute, sans jamais détourner le regard. Confiante en elle et en ses capacités, elle dit ce qu'elle pense et agit sans détour : une guérisseuse qui ne se laisse pas marcher sur les pattes.\n\nSon aisance auprès des autres la rend facile d'approche, et derrière cette sociabilité se cache une bienveillance sincère, doublée d'une patience à toute épreuve.\n\nMais Cigale a aussi ses ombres. Exigeante, bornée, héritière de la rigueur d'Harmonie des Prés et du cynisme d'Éclat du Scarabée, elle remet sans cesse en question les règles établies, comme celle qui interdit aux guérisseurs d'avoir des petits, alors qu'elle sait très bien que ce n'est jamais vraiment respecté.",
+      "groups": [
+        {
+          "title": "Qualités", "tone": "good",
+          "items": [
+            { "title": "Confiante", "text": "Depuis sa tendre enfance, Chant de Cigale n'a jamais affronté la vie la tête baissée : elle garde les yeux rivés sur ses adversaires, dit tout haut ce qu'elle pense et prend ses décisions sans détour. Cette qualité lui est bien utile dans sa fonction. Elle ne se laisse surtout pas marcher sur les pattes." },
+            { "title": "Sociable", "text": "On la voit souvent parler aux gens autour d'elle, même à des chats qu'elle ne connaît pas. Elle n'hésite pas à engager la conversation, se fait plein d'amis et n'est pas gênée par la foule : jamais cachée dans un coin à regarder le temps passer." },
+            { "title": "Bienveillante", "text": "D'une nature gentille, elle ne souhaite le mal de personne et s'efforce d'agir pour le bien et par le bien. Il est très rare que la femelle porte des actes ou des mots contraires à ses propres principes." },
+            { "title": "Patiente", "text": "Elle ne se laisse pas abattre ni surmener par les bêtises des autres. Elle sait attendre le bon moment pour agir et comprend que certaines choses prennent du temps." }
+          ]
+        },
+        {
+          "title": "Défauts", "tone": "bad",
+          "items": [
+            { "title": "Exigeante", "text": "Elle attend beaucoup des autres. Le chef et le lieutenant sont là pour faire régner l'ordre, mais Cigale prend plaisir à s'immiscer dans les commandes : il faut que tout soit bien fait, ordonné, bien appliqué, du plus jeune au plus vieux du camp." },
+            { "title": "Indomptable", "text": "Issue de l'éducation rigoureuse d'Harmonie des Prés et d'Éclat du Scarabée, deux femelles qui n'ont jamais plié, elle applique cet exemple, surtout depuis sa nomination. Elle reprend le flambeau de sa mentor : personne n'a à contester la parole d'une guérisseuse." },
+            { "title": "Bornée", "text": "Vouloir à tout prix accomplir ses objectifs n'est pas une qualité quand on poursuit son idée jusqu'au bout, même en ayant tort, même en s'en rendant malade." },
+            { "title": "Cynique", "text": "Un cynisme hérité d'Éclat du Scarabée. Pour elle, beaucoup de choses ne devraient pas être, et elle se retrouve souvent à combattre les règles en vigueur : elle ne comprend pas pourquoi les autres pourraient avoir des petits, et pas les guérisseurs." }
+          ]
+        },
+        {
+          "title": "Goûts", "tone": "good",
+          "items": [
+            { "title": "Le lièvre", "text": "Comme beaucoup de félins de son clan, le lièvre et même le lapin sont ses mets favoris. Pas de justification spéciale, seulement une adoration pour ces proies qu'elle pourrait chasser toute seule." },
+            { "title": "Les insectes", "text": "Une fascination pour les petites bêtes de la lande : cigales qui chantent, grillons, libellules au-dessus de l'eau des gorges, lucioles qui offrent un magnifique spectacle. Un passe-temps plus qu'autre chose." },
+            { "title": "Le temps ensoleillé", "text": "Le meilleur temps qui existe : le soleil, le calme, le ciel bleu et dégagé. C'est souvent par ce temps qu'elle ne ressent plus la boule au ventre que lui cause son quotidien." }
+          ]
+        },
+        {
+          "title": "Dégoûts", "tone": "bad",
+          "items": [
+            { "title": "Les incapables", "text": "Ceux qui ne fournissent pas assez d'effort, ou pas correctement. Dans la vie en collectivité, tout doit être coordonné et impeccable ; ceux qui traînent bloquent tout le monde. Quand Cigale en attrape un, ça ne fait pas bon ménage." },
+            { "title": "Le poisson", "text": "Catégorique. Elle en a goûté, elle en a senti, et c'est la gerbe. Elle ne vivra jamais près d'une rivière : le poisson est repoussant." },
+            { "title": "La mauvaise saison", "text": "Un dégoût total. Elle y est née et a failli y rester : un traumatisme autant qu'une aversion. Elle redoute déjà le froid, l'humidité, le manque de proies et l'absence du soleil qu'elle adore." }
+          ]
+        },
+        {
+          "title": "Peurs & phobies", "tone": "neutral",
+          "items": [
+            { "title": "Le mauvais temps", "text": "Il annonce toujours quelque chose de mauvais, et sa tension se communique aux autres sans qu'elle le veuille. Ses premiers souvenirs restent la faim, le calme pesant du camp des gorges et la neige, avec ce ciel gris qui la stresse pour un rien." },
+            { "title": "Les chiens", "text": "Elle n'en a jamais vu ni senti, mais elle sait que ça cause des dégâts : d'après les histoires, ce sont d'horribles monstres qui mangent les chats." },
+            { "title": "La profondeur de l'eau", "text": "Sa phobie. Elle est très peu en contact avec l'eau profonde, mais imaginer ou rêver qu'elle tombe sans savoir nager la bouleverse et lui donne des angoisses." }
+          ]
+        },
+        {
+          "title": "Habitudes", "tone": "neutral",
+          "items": [
+            { "title": "Le rangement", "text": "Un héritage de sa mentor : chaque matin et chaque soir, la rose range sa grotte et vérifie ses stocks. Ça ne s'explique pas, ça se fait." },
+            { "title": "Les siestes au soleil", "text": "Quand il fait assez chaud et qu'elle n'a rien à faire, elle se prélasse sur un rocher haut, non loin du camp." },
+            { "title": "Le tic des yeux", "text": "Quand elle est fatiguée, elle cligne des yeux très fort, avec obsession. Elle ne peut pas s'en empêcher." }
+          ]
+        }
+      ]
+    },
+    "physique": {
+      "summary": "Chant de Cigale est une petite femelle de taille fine, au corps longiligne. De la tête à la queue, on ne distingue qu'une silhouette courte, au pelage très court qui laisse deviner des muscles saillants.\n\nSon pelage est ce qu'on appelle faon, presque rosâtre par moments, très semblable à celui de sa mère. Sa tête est petite, ornée de grands yeux jaunes et de grandes oreilles. Petite et claire, elle se remarque.\n\nSa taille cache bien son jeu : on pourrait la croire faible, mais elle est rapide, endurante et discrète. Il ne faut pas la sous-estimer. Ce qu'on remarque au premier abord, c'est son regard intéressé par ce qui l'entoure, cet émerveillement qui sait vite se taire quand il faut faire preuve de sérieux et d'obéissance.",
+      "facts": [
+        { "label": "Taille", "value": "27,5 cm au garrot" },
+        { "label": "Poids", "value": "3 kg" },
+        { "label": "Pelage", "value": "Faon, court, presque rosâtre" },
+        { "label": "Yeux", "value": "Grands, jaunes" },
+        { "label": "Silhouette", "value": "Petite, fine, longiligne" }
+      ],
+      "groups": [
+        {
+          "title": "Points forts", "tone": "good",
+          "items": [
+            { "title": "Son agilité", "text": "Grâce à sa carrure longiligne et à son entraînement, son agilité éclate en chasse comme au combat. Son corps se tord presque aisément, ce qui paraît parfois étrange, et elle se rattrape sans peine quand elle trébuche ou glisse." },
+            { "title": "Son endurance", "text": "Sa vie sur la lande lui donne l'endurance de courir ou marcher sur de longues distances sans se fatiguer. Elle est petite et mince, mais assez musclée pour suivre un très bon rythme." },
+            { "title": "Sa vitesse", "text": "Elle excelle en vitesse, en partie par l'entraînement, en partie grâce à sa carrure. N'essayez pas trop de la chasser : elle courra très vite et très longtemps." }
+          ]
+        },
+        {
+          "title": "Points faibles", "tone": "bad",
+          "items": [
+            { "title": "Sa sensibilité", "text": "Quand elle se blesse un peu, sa réaction paraît disproportionnée. Une branche pourrait l'entailler qu'elle criera de douleur au lieu d'être simplement surprise." },
+            { "title": "Le froid", "text": "Son pelage est trop court pour supporter le froid glacial et le vent perçant de la mauvaise saison. C'est aussi pour cela qu'elle redoute la saison des neiges." },
+            { "title": "Petites griffes", "text": "Comme sa mère, elle a d'étonnantes petites griffes, qui ne blessent pas vraiment en combat ni ne s'accrochent aux surfaces pour éviter de tomber. Cela porte un certain risque." }
+          ]
+        },
+        {
+          "title": "Parure", "tone": "neutral",
+          "items": [
+            { "title": "Ailes de cigale", "text": "Deux paires d'ailes de cigale, derrière chaque oreille. Purement décoratives, mais portées parce qu'elle porte le nom de la cigale, ce qui a une certaine symbolique." },
+            { "title": "Les lavandes", "text": "Des lavandes accrochées à sa queue, un cadeau de Cri de l'Épervier. Un présent qui a beaucoup de valeur aux yeux de Cigale." }
+          ]
+        }
+      ]
+    },
+    "health": {
+      "pv": 50, "pv_max": 50, "pa": 5, "pa_max": 5,
+      "facts": [
+        { "label": "Handicap", "value": "Aucun" },
+        { "label": "Cicatrices", "value": "Aucune" },
+        { "label": "Aversions", "value": "Le poisson, le froid, l'eau profonde" }
+      ],
+      "groups": [
+        {
+          "title": "Constitution", "tone": "good",
+          "items": [
+            { "title": "Souffle & jambes", "text": "Endurante et rapide, elle tient longtemps un rythme soutenu sans fatigue apparente." },
+            { "title": "Souplesse", "text": "Un corps qui se tord et se rattrape : les chutes sont rares et rarement graves." }
+          ]
+        },
+        {
+          "title": "Points de vigilance", "tone": "bad",
+          "items": [
+            { "title": "Douleur", "text": "Une sensibilité anormale : la douleur est vécue plus fort que la blessure ne l'est vraiment." },
+            { "title": "Froid", "text": "Pelage court : exposition prolongée au froid et à l'humidité à éviter absolument." },
+            { "title": "Griffes", "text": "Petites griffes : peu d'accroche, risque accru lors des grimpées." }
+          ]
+        },
+        {
+          "title": "Esprit", "tone": "neutral",
+          "items": [
+            { "title": "Traumatisme de la mauvaise saison", "text": "Née pendant le Grand Blanc. Faim, froid et neige hantent encore ses nuits ; le ciel gris la tend." },
+            { "title": "Eaux profondes", "text": "Phobie : l'idée de tomber sans savoir nager provoque cauchemars et angoisses." },
+            { "title": "Tic", "text": "Cligne fortement des yeux lorsqu'elle est épuisée." }
+          ]
+        },
+        {
+          "title": "Dans sa tanière", "tone": "neutral",
+          "items": [
+            { "title": "Harmonie des Prés", "text": "Sa mère, 90 lunes, malade, passe ses journées dans la tanière de Cigale. Sa maladie l'empêche de faire beaucoup de choses. Elle vit peut-être ses derniers instants, prématurément." }
+          ]
+        }
+      ]
+    },
+    "story": {
+      "chapters": [
+        { "title": "Une naissance silencieuse", "text": "Chant de Cigale n'a pas une grande histoire. Elle est née en silence durant le Grand Blanc, et ses seuls souvenirs sont un ventre vide, le froid, la neige et le calme pesant d'une assemblée de chats réunis dans une grotte des gorges.\n\nElle était très jeune, mais sa résilience d'enfant n'a pas suffi à lui faire oublier combien il était dur de grandir dans ces conditions." },
+        { "title": "L'enfance sur la lande", "text": "Pourtant elle s'en est remise et a grandi aimée des siens, sans toujours comprendre les disputes et les problèmes des adultes qui entouraient Étoile de Griffe et Éclat du Scarabée.\n\nC'est dans une période lumineuse, quand la vie reprenait son cours sur la lande, qu'elle a connu la vie au camp, compté les fleurs alentour et admiré les premiers insectes, avant même les animaux." },
+        { "title": "L'élue de Scarabée", "text": "Plus tard, elle fut choisie personnellement par Éclat du Scarabée pour lui succéder un jour. Son apprentissage fut plus influencé par la voie du guerrier que par celle du guérisseur, mais il s'est révélé très utile." },
+        { "title": "Aujourd'hui", "text": "Le seul problème dans la vie de Cigale est désormais de savoir comment respecter les volontés de sa mentor, et résoudre le mystère de la disparition des ancêtres." }
+      ],
+      "convictions_title": "Convictions & loyauté",
+      "convictions": [
+        { "title": "Relation au clan", "text": "Bien que de nombreuses tensions aient été ressenties à cause de sa famille, Cigale n'en a jamais souffert et préfère se souvenir de l'enfant post-hivernale qui, avec ses adelphes, était l'un des seuls chatons chouchoutés du clan, courant après les papillons de leur première saison des feuilles nouvelles.\n\nLe seul hic : la tension naissante entre elle et le chef du clan, Étoile d'Ocre, qui grandit de jour en jour depuis la mort d'Éclat du Scarabée." },
+        { "title": "Avis sur les autres clans", "text": "Elle essaie de rester neutre sur les deux autres clans. Pourtant, elle ne peut cesser d'éprouver de l'aversion pour le Clan de l'Ombre depuis qu'elle connaît l'histoire de son chef et de sa guérisseuse, et ce qu'a raconté une aveugle qui séjourna très peu de temps au clan avant de disparaître un matin.\n\nDu Clan du Tonnerre, elle entend peu parler, mais commence à croire que leur rang grandissant est très dangereux. Elle s'en méfie comme du Clan de l'Ombre.\n\nBeaucoup d'entre eux ont probablement participé à faire partir le Clan des Étoiles, comme l'ont fait, certainement, les membres du Clan de la Rivière, au vu de la rage des ancêtres la nuit où le Chêne fut détruit." },
+        { "title": "Croyance : le Clan des Étoiles", "text": "Chant de Cigale est perdue, plus encore depuis que le Clan des Étoiles les a abandonnés. Ses parents étaient assez croyants mais ont peu à peu perdu la foi avec le Grand Blanc ; pourtant il y a toujours eu cet espoir, cette attirance envers eux, qui ont tenu et rassemblé les autres.\n\nÉclat du Scarabée partageait une vision cynique des ancêtres : pas de la non-croyance, mais de la rage et du dégoût, que Cigale a tout de suite partagés.\n\nFinalement, la jeune femelle se demande qui prend les mauvaises décisions : les chats qui vivent sur ces terres, ou le Clan des Étoiles. Ils acceptent ou non l'ascension d'un chef, puis s'énervent de toutes ces mauvaises décisions en détruisant un chêne sacré…" }
+      ]
+    },
+    "rp": {
+      "intro": "Les fils où Chant de Cigale vit, soigne et se dispute avec le monde. Chaque lien ouvre la page correspondante sur Discord.",
+      "threads": []
+    },
+    "family": {
+      "intro": "Une lignée de femelles qui ne se laissent jamais marcher sur les pattes, et deux frère et sœur que tout oppose."
+    },
+    "mentorship": {
+      "intro": "On n'apprend pas seulement les herbes auprès d'un mentor : on hérite d'une façon de tenir la tête.",
+      "paragraphs": [
+        { "title": "Éclat du Scarabée", "text": "Sa mentor fut, pour elle, le meilleur exemple de sa vie. Elle lui a tout appris : la chasse, le combat, et le peu de savoir qui lui était accordé sur les plantes. Même avec cela, Cigale fait une assez bonne guérisseuse, même si de l'entraînement et de la connaissance ne seraient pas de refus…" },
+        { "title": "Le grand vide", "text": "Après la mort de Scarabée, il y eut un grand vide et un long deuil de deux lunes avant que Chant de Cigale s'en remette, et encore…" },
+        { "title": "Le flambeau", "text": "Maintenant, elle doit reprendre son flambeau et, en partie, s'occuper de son seul enfant, Petite Mygale." }
+      ]
+    },
+    "healer": {
+      "intro": "Chant de Cigale est la guérisseuse du Clan du Vent, un clan qui a énormément souffert. Elle a pris la suite d'Éclat du Scarabée, et avec elle une tanière, des stocks, des patients… et des questions sans réponses.",
+      "facts": [
+        { "label": "Rang", "value": "Guérisseuse du Clan du Vent" },
+        { "label": "Mentor", "value": "Éclat du Scarabée (décédée)" },
+        { "label": "Apprentissage", "value": "Plus guerrier que guérisseur" }
+      ],
+      "groups": [
+        {
+          "title": "La succession", "tone": "neutral",
+          "items": [
+            { "title": "Choisie", "text": "Éclat du Scarabée l'a choisie personnellement pour lui succéder un jour. Aujourd'hui Cigale reprend le flambeau, et personne n'a à contester la parole d'une guérisseuse." },
+            { "title": "Un héritage double", "text": "De sa mère, l'éducation rigoureuse. De sa mentor, le cynisme et le goût de l'ordre. Les deux font la guérisseuse qu'elle est." }
+          ]
+        },
+        {
+          "title": "La tanière", "tone": "good",
+          "items": [
+            { "title": "Matin et soir", "text": "Chaque matin et chaque soir, Cigale range sa grotte et vérifie ses stocks. Une habitude gardée de sa mentor." },
+            { "title": "Une patiente de plus", "text": "Harmonie des Prés, malade, passe ses journées dans la tanière. S'occuper d'elle est une charge, mais Cigale la porte." }
+          ]
+        },
+        {
+          "title": "Savoir & apprentissage", "tone": "neutral",
+          "items": [
+            { "title": "Encore à apprendre", "text": "Son savoir sur les plantes est mince, hérité des quelques connaissances que Scarabée lui accordait. Elle fait une assez bonne guérisseuse, mais de l'entraînement ne serait pas de refus." }
+          ]
+        },
+        {
+          "title": "Loi & conscience", "tone": "bad",
+          "items": [
+            { "title": "La loi des petits", "text": "Elle ne comprend pas pourquoi les guérisseurs n'auraient pas le droit d'avoir des petits, quand tout le monde sait que cette règle n'est jamais vraiment respectée. Elle le répète souvent." }
+          ]
+        },
+        {
+          "title": "Le mystère des ancêtres", "tone": "neutral",
+          "items": [
+            { "title": "Un silence", "text": "Le Clan des Étoiles a abandonné les clans. Pour une guérisseuse, c'est une plaie ouverte : respecter les volontés de sa mentor et résoudre le mystère de leur disparition est désormais sa plus grande affaire." }
+          ]
+        }
+      ]
+    }
+  },
+  "relations": [
+    { "name": "Harmonie des Prés", "role": "Mère", "category": "family", "status": "vivant", "kind": "pnj", "bond": 2, "sort": 10,
+      "summary": "Une mère aimante, aujourd'hui malade, qui vit ses derniers instants dans la tanière de Cigale.",
+      "details": "Aimante avec ses enfants biologiques comme avec ses enfants de substitution, aimée de tous malgré sa dualité entre Étoile de Griffe et Éclat du Scarabée. Pilier du clan à son époque, elle est reconnaissable à son pelage faon ticked tabby, ses yeux jaunes et son corps longiligne. 90 lunes.",
+      "image_url": "" },
+    { "name": "Plumage de Gypaète", "role": "Père", "category": "family", "status": "vivant", "kind": "pnj", "bond": 0, "sort": 20,
+      "summary": "Un père calme, un peu trop silencieux, dont elle s'est éloignée depuis sa séparation d'avec Harmonie.",
+      "details": "Un mâle au long museau et au physique longiligne, au pelage blue mink : corps blanc cassé, extrémités grises. Peu bavard. 110 lunes, en assez bonne santé.",
+      "image_url": "" },
+    { "name": "Cri de l'Épervier", "role": "Frère", "category": "family", "status": "vivant", "kind": "pnj", "bond": 2, "sort": 30,
+      "summary": "Le plus gentil de tous, avec le plus grand cœur. Celui qui lui a offert les lavandes.",
+      "details": "Pelage bleu ticked et très grandes oreilles. Pas naïf, mais si bienveillant et incroyable avec tout le monde qu'on se sent extrêmement bien avec lui.",
+      "image_url": "" },
+    { "name": "Envol du Bombyx", "role": "Sœur", "category": "family", "status": "vivant", "kind": "pnj", "bond": -1, "sort": 40,
+      "summary": "De plus en plus distante, elle lance des piques à ceux qui « le méritent ».",
+      "details": "Pelage faon ticked mink comme leur père, long museau, air altier. Elle se forge une carapace et s'éloigne de sa famille ; Cigale la trouve de plus en plus désagréable.",
+      "image_url": "" },
+    { "name": "Éclat du Scarabée", "role": "Mentor", "category": "mentor", "status": "mort", "kind": "pnj", "bond": 2, "sort": 50,
+      "summary": "Le meilleur exemple de sa vie. Elle lui a tout appris, et sa mort a laissé un grand vide.",
+      "details": "Ancienne guérisseuse du Clan du Vent, cynique, indomptable, ordonnée. Elle a choisi personnellement Cigale pour lui succéder.",
+      "image_url": "" },
+    { "name": "Petite Mygale", "role": "Enfant de sa mentor", "category": "mentor", "status": "vivant", "kind": "pnj", "bond": 1, "sort": 60,
+      "summary": "Le seul enfant d'Éclat du Scarabée, dont Cigale doit en partie s'occuper.",
+      "details": "Un chaton que Cigale protège par fidélité à sa mentor disparue.",
+      "image_url": "" },
+    { "name": "Étoile d'Ocre", "role": "Chef du clan", "category": "clan", "status": "vivant", "kind": "pnj", "bond": -1, "sort": 70,
+      "summary": "Une tension naissante qui grandit de jour en jour depuis la mort de Scarabée.",
+      "details": "",
+      "image_url": "" },
+    { "name": "Rafale des Joncs", "role": "Lieutenant", "category": "clan", "status": "vivant", "kind": "pnj", "bond": 0, "sort": 75,
+      "summary": "Lieutenant actuel du Clan du Vent.",
+      "details": "",
+      "image_url": "" },
+    { "name": "Étoile de Griffe", "role": "Figure du passé", "category": "clan", "status": "inconnu", "kind": "pnj", "bond": 0, "sort": 76,
+      "summary": "Liée, avec Éclat du Scarabée, à la dualité d'Harmonie des Prés.",
+      "details": "Les disputes des adultes qui les entouraient ont marqué l'enfance de Cigale.",
+      "image_url": "" },
+    { "name": "Clan de l'Ombre", "role": "Clan voisin", "category": "other", "status": "collectif", "kind": "pnj", "bond": -2, "sort": 80,
+      "summary": "Une aversion née de l'histoire de son chef et de sa guérisseuse.",
+      "details": "Nourrie aussi par le récit d'une aveugle qui séjourna très brièvement au clan avant de disparaître un matin.",
+      "image_url": "" },
+    { "name": "Clan du Tonnerre", "role": "Clan voisin", "category": "other", "status": "collectif", "kind": "pnj", "bond": -1, "sort": 90,
+      "summary": "Elle en entend peu parler, mais son rang grandissant lui paraît dangereux.",
+      "details": "Elle s'en méfie comme du Clan de l'Ombre.",
+      "image_url": "" },
+    { "name": "Clan de la Rivière", "role": "Clan voisin", "category": "other", "status": "collectif", "kind": "pnj", "bond": -1, "sort": 100,
+      "summary": "Ses membres ont sans doute participé à faire partir le Clan des Étoiles.",
+      "details": "Au vu de la rage des ancêtres la nuit où le Chêne fut détruit. Et puis il y a le poisson…",
+      "image_url": "" }
+  ],
+  "gallery": [
+    { "title": "Portrait de Chant de Cigale", "caption": "Illustration par @araxia.", "url": "assets/cigale.webp", "sort": 10 }
+  ]
+}

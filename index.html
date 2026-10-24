@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr" data-season="sun">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chant de Cigale — Carnet de la guérisseuse</title>
+<meta name="description" content="Le carnet de Chant de Cigale, guérisseuse du Clan du Vent.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="lav lav-l" aria-hidden="true"></div>
+<div class="lav lav-r" aria-hidden="true"></div>
+
+<div class="stage" id="stage">
+  <button class="chip chip-toc" id="btn-toc" title="Sommaire">✦ Sommaire</button>
+  <button class="chip chip-season" id="btn-season" title="Changer de saison" aria-label="Changer de saison">☀</button>
+  <div class="book" id="book" aria-live="polite">
+    <nav class="ribbons" id="ribbons" aria-label="Sous-pages"></nav>
+    <section class="page page-left" id="pl"></section>
+    <section class="page page-right" id="pr"></section>
+    <nav class="tabs" id="tabs" aria-label="Chapitres"></nav>
+  </div>
+</div>
+
+<div class="modal" id="toc" hidden></div>
+<div class="modal lightbox" id="lightbox" hidden></div>
+
+<div id="cover" aria-label="Ouvrir le carnet">
+  <div class="board">
+    <div class="board-front">
+      <div class="emblem" id="cover-emblem"></div>
+      <h1>Chant<br>de Cigale</h1>
+      <p>Carnet de la guérisseuse<br>du Clan du Vent</p>
+      <button class="open-hint">Ouvrir le carnet</button>
+    </div>
+    <div class="board-back"></div>
+  </div>
+</div>
+
+<noscript><p style="position:fixed;inset:auto 0 0;padding:1em;background:#fff;text-align:center">Ce carnet a besoin de JavaScript pour tourner ses pages.</p></noscript>
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Tableau de bord — Chant de Cigale</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div id="gate" class="gate"></div>
+<div id="app" hidden>
+  <aside class="side">
+    <a class="brand" href="../">✦ Chant de Cigale<small>Tableau de bord</small></a>
+    <nav id="nav"></nav>
+    <div class="side-foot"><span id="who"></span><button id="seed" class="ghost">Importer la fiche initiale</button><button id="logout" class="ghost">Se déconnecter</button></div>
+  </aside>
+  <main class="main"><div id="view"></div></main>
+</div>
+<div id="toast" class="toast" hidden></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="../js/config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
