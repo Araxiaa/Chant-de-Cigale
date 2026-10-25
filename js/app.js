@@ -77,26 +77,6 @@
   function portrait(zoom, pos) {
     return `<div class="portrait" style="--z:${zoom};--p:${pos}" role="img" aria-label="Portrait de Chant de Cigale"></div>`;
   }
-  function constellation(rels) {
-    const n = rels.length, cxs = 220, cys = 200;
-    const nodes = rels.map((r, i) => {
-      const a = (-90 + i * 360 / Math.max(n, 1)) * Math.PI / 180, rad = 150 - (Number(r.bond) + 2) * 14;
-      const x = cxs + Math.cos(a) * rad, y = cys + Math.sin(a) * rad * .9, b = Number(r.bond);
-      const col = b > 0 ? 'var(--leaf)' : b < 0 ? 'var(--thorn)' : 'var(--taupe)';
-      const anchor = x > cxs + 10 ? 'start' : x < cxs - 10 ? 'end' : 'middle';
-      const tx = x + (anchor === 'start' ? 11 : anchor === 'end' ? -11 : 0), ty = y + (anchor === 'middle' ? (y < cys ? -12 : 20) : 4);
-      return `<g class="cn" style="--i:${i}"><line x1="${cxs}" y1="${cys}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="${col}" ${r.status === 'mort' ? 'stroke-dasharray="3 5"' : ''}/>
-        <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${6 + (b + 2)}" fill="${col}"/>
-        <text x="${tx.toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="${anchor}">${esc(r.name)}</text></g>`;
-    }).join('');
-    return `<svg viewBox="-20 0 480 400" class="constel" aria-label="Carte des relations">
-      <circle cx="${cxs}" cy="${cys}" r="60" class="ring"/><circle cx="${cxs}" cy="${cys}" r="110" class="ring"/><circle cx="${cxs}" cy="${cys}" r="160" class="ring"/>
-      ${nodes}
-      <clipPath id="cc"><circle cx="${cxs}" cy="${cys}" r="34"/></clipPath>
-      <circle cx="${cxs}" cy="${cys}" r="38" class="core"/>
-      <image href="assets/cigale-cut.webp" x="${cxs - 76}" y="${cys - 46}" width="152" height="91" clip-path="url(#cc)" preserveAspectRatio="xMidYMid slice"/></svg>`;
-  }
-
   /* ───────── Briques de contenu ───────── */
   const facts = list => `<dl class="facts">${(list || []).map(f => `<div class="rv"><dt>${esc(f.label)}</dt><dd>${esc(f.value)}</dd></div>`).join('')}</dl>`;
   const notes = items => `<div class="notes">${(items || []).map((n, i) =>
@@ -105,23 +85,118 @@
     `<section class="group tone-${esc(g.tone || 'neutral')}"><h2 class="rv"><span>${esc(g.title)}</span></h2>${notes(g.items)}</section>`).join('');
   const empty = t => `<p class="empty rv">${esc(t)}</p>`;
 
-  function relCard(r) {
-    const b = Math.max(-2, Math.min(2, Number(r.bond) || 0));
-    const ava = r.image_url ? `<img src="${esc(r.image_url)}" alt="" loading="lazy">` : `<span>${esc((r.name || '?').replace(/^(Petite?|Grande?|Étoile|Chant|Cri|Envol|Éclat|Plumage|Harmonie|Clan)\s+(d[eu]s?\s+|de l['’]|d['’])?/i, '').charAt(0).toUpperCase() || '?')}</span>`;
-    return `<article class="rel rv" data-cat="${esc(r.category)}" data-bond="${b}" data-status="${esc(r.status)}">
+  /* ───────── Pages (contenu de droite) ───────── */
+  const C = k => D.content[k] || {};
+  /* ───────── Relations : lunes, tri, carte ───────── */
+  const clampB = b => Math.max(-2, Math.min(2, Number(b) || 0));
+  const maxMoon = () => { const f = (C('identity').fields || []).find(x => /lune/i.test(x.label)); const m = f && String(f.value).match(/\d+/); return m ? Number(m[0]) : 13; };
+  const RS = { moon: 13, sort: 'bond-desc', cat: 'all', q: '', timer: null };
+  const hist = r => (Array.isArray(r.history) ? r.history : []).filter(h => h && h.moon !== '' && h.moon != null)
+    .map(h => ({ moon: Number(h.moon), bond: clampB(h.bond), opinion: h.opinion || '' })).sort((a, b) => a.moon - b.moon);
+  function stateAt(r, m) { // lien de Cigale avec r à la lune m
+    const h = hist(r), max = maxMoon();
+    if (!h.length) return { known: true, bond: clampB(r.bond), opinion: '' };
+    const last = h.filter(x => x.moon <= m).pop();
+    if (!last) return { known: false, bond: 0, opinion: '' };
+    return { known: true, bond: m >= max ? clampB(r.bond) : last.bond, opinion: last.opinion };
+  }
+  const resetRS = () => { stopPlay(); Object.assign(RS, { moon: maxMoon(), sort: 'bond-desc', cat: 'all', q: '' }); };
+  const matches = r => (RS.cat === 'all' || r.category === RS.cat) && (!RS.q || (r.name + ' ' + r.role).toLowerCase().includes(RS.q.toLowerCase()));
+  const SORTS = {
+    'bond-desc': (a, b) => b.s.bond - a.s.bond || a.r.name.localeCompare(b.r.name, 'fr'),
+    'bond-asc': (a, b) => a.s.bond - b.s.bond || a.r.name.localeCompare(b.r.name, 'fr'),
+    name: (a, b) => a.r.name.localeCompare(b.r.name, 'fr'),
+    cat: (a, b) => Object.keys(CAT).indexOf(a.r.category) - Object.keys(CAT).indexOf(b.r.category) || b.s.bond - a.s.bond
+  };
+  const shown = () => D.relations.map(r => ({ r, s: stateAt(r, RS.moon) })).filter(x => x.s.known && matches(x.r)).sort(SORTS[RS.sort]);
+  const nowList = list => list.map(r => ({ r, s: stateAt(r, maxMoon()) }));
+
+  function evolution(r) {
+    const h = hist(r), max = maxMoon();
+    if (!h.length) return '';
+    const pts = [...h, { moon: max, bond: clampB(r.bond) }].map(p => [10 + Math.min(p.moon, max) / Math.max(max, 1) * 220, 25 - p.bond * 10]);
+    let d = `M${pts[0][0]} ${pts[0][1]}`;
+    for (let i = 1; i < pts.length; i++) d += `H${pts[i][0]}V${pts[i][1]}`;
+    return `<details class="evo"><summary>Évolution du lien</summary>
+      <svg viewBox="0 0 240 50" class="spark" aria-hidden="true"><line x1="10" x2="230" y1="25" y2="25"/><path d="${d}"/>${pts.slice(0, -1).map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="3.5"/>`).join('')}</svg>
+      <ol>${h.map(x => `<li><b>Lune ${x.moon}</b> <span class="bd b${x.bond + 2}">${BOND[x.bond]}</span>${x.opinion ? ` — « ${esc(x.opinion)} »` : ''}</li>`).join('')}</ol></details>`;
+  }
+  function relCard({ r, s }, anim = true) {
+    const b = s.bond, id = D.relations.indexOf(r);
+    const ava = r.image_url ? `<img src="${esc(r.image_url)}" alt="" loading="lazy">` : `<span>${esc((r.name || '?').replace(/^(Petite?|Grande?|Étoile|Chant|Cri|Envol|Éclat|Plumage|Harmonie|Rafale|Clan)\s+(d[eu]s?\s+|de l['’]|d['’])?/i, '').charAt(0).toUpperCase() || '?')}</span>`;
+    return `<article class="rel${anim ? ' rv' : ''}" data-id="${id}" data-cat="${esc(r.category)}">
       <div class="rel-ava">${ava}</div>
       <div class="rel-main">
         <h3>${esc(r.name)}</h3>
         <div class="rel-role">${esc(r.role)}${r.kind ? ' · ' + (r.kind === 'joueur' ? 'Joueur' : 'PNJ') : ''} · <span class="st st-${esc(r.status)}">${esc(STATUS[r.status] || r.status)}</span></div>
         <p>${esc(r.summary)}</p>
+        ${s.opinion ? `<blockquote class="opinion">« ${esc(s.opinion)} »</blockquote>` : ''}
         ${r.details ? `<details><summary>Lire la suite</summary>${paras(r.details)}</details>` : ''}
+        ${evolution(r)}
         <div class="bond b${b + 2}" title="Affinité : ${BOND[b]}"><span class="bond-track"><i style="left:${(b + 2) * 25}%"></i></span><span class="bond-label">${BOND[b]}</span></div>
       </div></article>`;
   }
   const relList = cat => D.relations.filter(r => !cat || (Array.isArray(cat) ? cat.includes(r.category) : r.category === cat));
 
-  /* ───────── Pages (contenu de droite) ───────── */
-  const C = k => D.content[k] || {};
+  // Carte : les cercles = l'affinité (centre = très proche), les quartiers = la catégorie. Pas d'étiquettes : on survole / on touche.
+  const SECT = { family: -45, mentor: -135, other: 135, clan: 45 }, MAPC = 220;
+  const ringR = b => 64 + (2 - b) * 35;
+  function angles(list) {
+    const by = {}, out = new Map();
+    list.forEach(r => (by[r.category] = by[r.category] || []).push(r));
+    for (const [c, arr] of Object.entries(by)) {
+      const n = arr.length, step = n > 1 ? Math.min(72 / (n - 1), 22) : 0;
+      arr.forEach((r, k) => out.set(r, { a: ((SECT[c] ?? 135) + (k - (n - 1) / 2) * step) * Math.PI / 180, j: k % 2 ? 7 : -7 }));
+    }
+    return out;
+  }
+  const dotXY = (r, ang, m) => { const p = ang.get(r), rad = ringR(stateAt(r, m).bond) + p.j; return [MAPC + Math.cos(p.a) * rad, MAPC + Math.sin(p.a) * rad]; };
+  function mapSvg(list) {
+    const ang = angles(list);
+    const dots = list.map(r => {
+      const s = stateAt(r, RS.moon), [x, y] = dotXY(r, ang, RS.moon), id = D.relations.indexOf(r);
+      return `<g class="dot d-${esc(r.category)}${r.status === 'mort' ? ' dead' : ''}" data-id="${id}" style="transform:translate(${x.toFixed(1)}px,${y.toFixed(1)}px);opacity:${s.known ? (matches(r) ? 1 : .15) : 0}"><circle r="8"/></g>`;
+    }).join('');
+    const rings = [2, 1, 0, -1, -2].map(b => `<circle class="ring" cx="${MAPC}" cy="${MAPC}" r="${ringR(b)}"/>`).join('');
+    const labs = [2, 1, 0, -1, -2].map(b => `<text class="rlab" x="${MAPC + (b % 2 ? -1 : 1) * ringR(b)}" y="${MAPC + 4}" text-anchor="middle">${BOND[b]}</text>`).join('');
+    const quad = [['Famille', 14, 22, 'start'], ['Mentorat', 14, 428, 'start'], ['Clan du Vent', 426, 22, 'end'], ['Hors du clan', 426, 428, 'end']]
+      .map(([t, x, y, a]) => `<text class="qlab" x="${x}" y="${y}" text-anchor="${a}">${t}</text>`).join('');
+    return `<svg viewBox="0 0 440 440" class="map" aria-label="Carte des relations de Chant de Cigale">${rings}${quad}${labs}
+      <clipPath id="cc"><circle cx="${MAPC}" cy="${MAPC}" r="34"/></clipPath>
+      <circle cx="${MAPC}" cy="${MAPC}" r="38" class="core"/>
+      <image href="assets/cigale-cut.webp" x="${MAPC - 76}" y="${MAPC - 46}" width="152" height="91" clip-path="url(#cc)" preserveAspectRatio="xMidYMid slice"/>${dots}</svg>`;
+  }
+  const MAPHINT = 'Plus un point est proche du centre, plus le lien est fort. Survole ou touche un point.';
+  function placeDots() {
+    const ang = angles(D.relations);
+    document.querySelectorAll('#pl .dot').forEach(g => {
+      const r = D.relations[g.dataset.id], s = stateAt(r, RS.moon), [x, y] = dotXY(r, ang, RS.moon);
+      g.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`;
+      g.style.opacity = s.known ? (matches(r) ? 1 : .15) : 0;
+      g.style.pointerEvents = s.known ? '' : 'none';
+    });
+  }
+  function caption(id) {
+    const cap = $('#map-cap'); if (!cap) return;
+    if (id == null) { cap.textContent = MAPHINT; return; }
+    const r = D.relations[id], s = stateAt(r, RS.moon);
+    cap.innerHTML = `<b>${esc(r.name)}</b> · ${esc(r.role)} — <em>${BOND[s.bond]}</em>${s.opinion ? `<br><span class="q">« ${esc(s.opinion)} »</span>` : ''}`;
+  }
+  function refresh() {
+    const box = $('#rels'); if (!box) return;
+    const list = shown();
+    box.innerHTML = list.length ? list.map(x => relCard(x, false)).join('') : empty('Personne ne correspond à cette recherche à cette lune.');
+    const max = maxMoon(), out = $('#moon-out');
+    if (out) out.textContent = 'Lune ' + RS.moon + (RS.moon >= max ? ' · aujourd\'hui' : '');
+    const sl = $('#moon'); if (sl && Number(sl.value) !== RS.moon) sl.value = RS.moon;
+    placeDots();
+  }
+  function stopPlay() { clearInterval(RS.timer); RS.timer = null; const b = $('#play'); if (b) b.textContent = '▶'; }
+  function startPlay() {
+    const max = maxMoon(); RS.moon = 0; refresh(); $('#play').textContent = '❚❚';
+    RS.timer = setInterval(() => { if (RS.moon >= max) return stopPlay(); RS.moon++; refresh(); }, 750);
+  }
+
   const RIGHT = {
     accueil() {
       const h = C('home'), id = C('identity');
@@ -155,19 +230,22 @@
         : empty('Aucun fil pour le moment. Les pages restent à écrire…'));
     },
     famille() {
-      const l = relList('family');
-      return `<div class="lead rv">${paras(C('family').intro)}</div><div class="rels">${l.map(relCard).join('') || empty('Personne ici pour le moment.')}</div>`;
+      const l = nowList(relList('family'));
+      return `<div class="lead rv">${paras(C('family').intro)}</div><div class="rels">${l.map(x => relCard(x)).join('') || empty('Personne ici pour le moment.')}</div>`;
     },
     mentorat() {
-      const m = C('mentorship'), l = relList('mentor');
-      return `<div class="lead rv">${paras(m.intro)}</div><div class="rels">${l.map(relCard).join('')}</div>${notes(m.paragraphs)}`;
+      const m = C('mentorship'), l = nowList(relList('mentor'));
+      return `<div class="lead rv">${paras(m.intro)}</div><div class="rels">${l.map(x => relCard(x)).join('')}</div>${notes(m.paragraphs)}`;
     },
     toutes() {
-      const chips = Object.entries({ all: 'Toutes', ...CAT }).map(([k, v]) => `<button class="fchip${k === 'all' ? ' on' : ''}" data-cat="${k}">${v}</button>`).join('');
+      const chips = Object.entries({ all: 'Toutes', ...CAT }).map(([k, v]) => `<button class="fchip${RS.cat === k ? ' on' : ''}" data-cat="${k}">${v}</button>`).join('');
       const legend = [-2, -1, 0, 1, 2].map(b => `<span class="lg b${b + 2}"><i></i>${BOND[b]}</span>`).join('');
-      return `<div class="lead rv"><p>L'index d'affinité mesure le fil qui relie Cigale à chacun, du plus tendu au plus tendre.</p></div>
-        <div class="legend rv">${legend}</div><div class="filters rv">${chips}</div>
-        <div class="rels" id="rels">${relList().map(relCard).join('') || empty('Aucune relation notée.')}</div>`;
+      const opts = Object.entries({ 'bond-desc': 'Du plus proche au plus tendu', 'bond-asc': 'Du plus tendu au plus proche', name: 'Par nom (A → Z)', cat: 'Par catégorie' }).map(([k, v]) => `<option value="${k}"${RS.sort === k ? ' selected' : ''}>${v}</option>`).join('');
+      return `<div class="lead rv"><p>L'index d'affinité mesure le fil qui relie Cigale à chacun. Fais glisser la lune sur la page de gauche pour voir ces liens se nouer, se tendre ou se défaire au fil de sa vie.</p></div>
+        <div class="legend rv">${legend}</div>
+        <div class="controls rv"><input id="q" type="search" placeholder="Chercher un nom…" value="${esc(RS.q)}" aria-label="Chercher"><select id="sort" aria-label="Trier">${opts}</select></div>
+        <div class="filters rv">${chips}</div>
+        <div class="rels" id="rels">${shown().map(x => relCard(x, false)).join('') || empty('Aucune relation notée.')}</div>`;
     },
     galerie() {
       const g = D.gallery || [];
@@ -188,7 +266,8 @@
     else if (key === 'son-histoire' || key === 'fils-rp') art = `<figure class="plate scene">${moor()}<figcaption>La lande</figcaption></figure>`;
     else if (['famille', 'mentorat', 'toutes'].includes(key)) {
       const l = key === 'famille' ? relList('family') : key === 'mentorat' ? relList('mentor') : relList();
-      art = `<figure class="plate scene">${constellation(l)}<figcaption>Les fils qui la relient</figcaption></figure>`;
+      const bar = key === 'toutes' ? `<div class="moonbar"><button id="play" aria-label="Rejouer sa vie, lune après lune">▶</button><input id="moon" type="range" min="0" max="${maxMoon()}" value="${RS.moon}" aria-label="Lune"><output id="moon-out">Lune ${RS.moon}${RS.moon >= maxMoon() ? ' · aujourd\'hui' : ''}</output></div>` : '';
+      art = `<figure class="plate scene mapplate">${mapSvg(l)}<figcaption id="map-cap">${MAPHINT}</figcaption></figure>${bar}`;
     } else art = `<figure class="plate scene herbs"><div class="bunch">${bunch(7)}</div>${wings('plate-wings')}<figcaption>${key === 'galerie' ? 'Souvenirs pressés' : 'Herbier de la tanière'}</figcaption></figure>`;
     return `<div class="lp"><div class="lp-top"><span class="num">${esc(p.ch.num)}</span><span class="lp-ch">${esc(p.ch.label)}</span></div>
       ${art}<p class="hand">${esc(NOTES[key] || '')}</p><div class="folio">— ${roman(i)} —</div></div>`;
@@ -222,6 +301,7 @@
   function go(i, animate = true) {
     if (busy) { queued = i; return; }
     if (i === cur) return;
+    resetRS();
     const lh = leftHtml(i), rh = rightHtml(i), fwd = i > cur;
     const prevRight = pr.innerHTML, prevLeft = pl.innerHTML;
     const first = cur < 0;
@@ -257,9 +337,14 @@
   /* ───────── Interactions ───────── */
   document.addEventListener('click', e => {
     const chip = e.target.closest('.fchip');
-    if (chip) {
-      document.querySelectorAll('.fchip').forEach(c => c.classList.toggle('on', c === chip));
-      document.querySelectorAll('#rels .rel').forEach(r => { r.hidden = chip.dataset.cat !== 'all' && r.dataset.cat !== chip.dataset.cat; });
+    if (chip) { RS.cat = chip.dataset.cat; document.querySelectorAll('.fchip').forEach(c => c.classList.toggle('on', c === chip)); refresh(); }
+    if (e.target.closest('#play')) RS.timer ? stopPlay() : startPlay();
+    const dot = e.target.closest('.dot');
+    if (dot) {
+      caption(dot.dataset.id);
+      document.querySelectorAll('.dot.sel').forEach(x => x.classList.remove('sel')); dot.classList.add('sel');
+      const card = document.querySelector(`#rels .rel[data-id="${dot.dataset.id}"]`);
+      if (card) { card.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' }); card.classList.remove('hl'); void card.offsetWidth; card.classList.add('hl'); }
     }
     const pol = e.target.closest('.polaroid');
     if (pol) {
@@ -270,6 +355,13 @@
     if (e.target.closest('.modal') && !e.target.closest('.toc-box, .lightbox figure')) { $('#toc').hidden = true; $('#lightbox').hidden = true; }
     if (e.target.closest('#toc a')) $('#toc').hidden = true;
   });
+  document.addEventListener('input', e => {
+    if (e.target.id === 'moon') { stopPlay(); RS.moon = Number(e.target.value); refresh(); }
+    if (e.target.id === 'q') { RS.q = e.target.value; refresh(); }
+  });
+  document.addEventListener('change', e => { if (e.target.id === 'sort') { RS.sort = e.target.value; refresh(); } });
+  document.addEventListener('mouseover', e => { const d = e.target.closest('.dot'); if (d) caption(d.dataset.id); });
+  document.addEventListener('mouseout', e => { if (e.target.closest('.dot')) { const s = document.querySelector('.dot.sel'); caption(s ? s.dataset.id : null); } });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') { $('#toc').hidden = true; $('#lightbox').hidden = true; return; }
     if (/INPUT|TEXTAREA|SUMMARY/.test(document.activeElement.tagName) || $('#cover')) return;

@@ -52,13 +52,17 @@
     { key: 'healer', label: 'Page Guérisseuse', fields: [{ k: 'intro', l: 'Introduction', t: 'area' }, { k: 'facts', l: 'Constats', t: 'list', title: 'label', item: KV }, GROUPS] }
   ];
   const TABLES = [
-    { table: 'relations', label: 'Relations', hint: 'Famille, mentor, clan, autres. L\'affinité alimente l\'index et la carte du livre.', title: 'name', sub: 'role', blank: { name: '', role: '', category: 'other', status: 'vivant', kind: 'pnj', bond: 0, summary: '', details: '', image_url: '', sort: 100 },
+    { table: 'relations', label: 'Relations', hint: 'Famille, mentor, clan, autres. L\'affinité alimente l\'index et la carte du livre.', title: 'name', sub: 'role', blank: { name: '', role: '', category: 'other', status: 'vivant', kind: 'pnj', bond: 0, summary: '', details: '', image_url: '', sort: 100, history: [] },
       fields: [{ k: 'name', l: 'Nom', t: 'text' }, { k: 'role', l: 'Lien (Mère, Rival, Ami…)', t: 'text' },
         { k: 'category', l: 'Catégorie', t: 'select', opts: [['family', 'Famille'], ['mentor', 'Mentorat'], ['clan', 'Clan du Vent'], ['other', 'Hors du clan']] },
         { k: 'status', l: 'Statut', t: 'select', opts: [['vivant', 'Vivant·e'], ['mort', 'Mort·e'], ['collectif', 'Collectif (clan…)'], ['inconnu', 'Inconnu·e']] },
         { k: 'kind', l: 'Type', t: 'select', opts: [['pnj', 'PNJ'], ['joueur', 'Joueur']] },
         { k: 'bond', l: 'Index d\'affinité', t: 'select', num: true, opts: [[-2, '−2 · Hostile'], [-1, '−1 · Tendue'], [0, '0 · Distante'], [1, '+1 · Amicale'], [2, '+2 · Très proche']] },
         { k: 'summary', l: 'Résumé (visible)', t: 'area', short: true }, { k: 'details', l: 'Détails (dépliable)', t: 'area' },
+        { k: 'history', l: 'Évolution du lien (une étape par changement ; l\'état actuel est l\'« Index d\'affinité » ci-dessus)', t: 'list', title: 'moon', blank: { moon: 0, bond: 0, opinion: '' }, item: [
+          { k: 'moon', l: 'À partir de quelle lune ?', t: 'number' },
+          { k: 'bond', l: 'Affinité à ce moment', t: 'select', num: true, opts: [[-2, '−2 · Hostile'], [-1, '−1 · Tendue'], [0, '0 · Distante'], [1, '+1 · Amicale'], [2, '+2 · Très proche']] },
+          { k: 'opinion', l: 'Ce que Cigale en pense (citation)', t: 'area', short: true }] },
         { k: 'image_url', l: 'Portrait', t: 'image' }, { k: 'sort', l: 'Ordre d\'affichage', t: 'number' }] },
     { table: 'gallery', label: 'Galerie', hint: 'Images affichées en polaroïds.', title: 'title', blank: { title: '', caption: '', url: '', sort: 100 },
       fields: [{ k: 'title', l: 'Titre', t: 'text' }, { k: 'caption', l: 'Légende', t: 'text' }, { k: 'url', l: 'Image', t: 'image' }, { k: 'sort', l: 'Ordre d\'affichage', t: 'number' }] }

@@ -284,3 +284,35 @@ h1, h2, h3 { font-weight: 500; margin: 0; }
 .lav span, .bunch span { will-change: transform; }
 .rp-scroll { contain: layout paint; }
 .modal { backdrop-filter: none; }
+
+/* ───── Relations : carte, lune, tri ───── */
+.mapplate { width: min(100%, 440px, 54vh); padding: 10px; }
+.map { width: 100%; display: block; overflow: visible; }
+.map .ring { fill: none; stroke: var(--taupe); stroke-dasharray: 2 5; opacity: .7; }
+.map .core { fill: var(--paper); stroke: var(--ink-soft); stroke-width: 2; }
+.rlab { font: 600 10.5px var(--serif); fill: var(--ink-soft); paint-order: stroke; stroke: var(--paper-2); stroke-width: 3px; pointer-events: none; }
+.qlab { font: 10.5px var(--caps); letter-spacing: .14em; text-transform: uppercase; fill: var(--ink-soft); opacity: .7; pointer-events: none; }
+.dot { --dc: var(--taupe); transition: transform .8s cubic-bezier(.3,.8,.3,1), opacity .4s; cursor: pointer; }
+.dot circle { fill: var(--dc); stroke: var(--paper); stroke-width: 2.5; transition: r .2s; }
+.dot:hover circle, .dot.sel circle { r: 11; }
+.dot.sel circle { stroke: var(--ink); }
+.dot.dead circle { fill: var(--paper); stroke: var(--dc); stroke-width: 3; stroke-dasharray: 3 2; }
+.d-family { --dc: #c98e7e; } .d-mentor { --dc: var(--lav); } .d-clan { --dc: var(--leaf); } .d-other { --dc: #7f93a8; }
+.mapplate figcaption { min-height: 3.6em; font-size: 1rem; line-height: 1.25; }
+.mapplate figcaption .q { font-family: var(--hand); font-weight: 700; font-size: 1.15rem; font-style: normal; }
+.moonbar { display: flex; align-items: center; gap: 10px; width: min(100%, 420px); margin-top: 10px; }
+.moonbar input { flex: 1; accent-color: var(--lav); }
+.moonbar output { font: .95rem var(--caps); min-width: 8.5em; text-align: right; color: var(--ink); }
+#play { width: 34px; height: 34px; padding: 0; border-radius: 50%; border: 1px solid var(--ink-soft); background: var(--paper-2); color: var(--ink); cursor: pointer; font-size: .9rem; }
+#play:hover { background: var(--lav); color: #fff; }
+.controls { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0; }
+.controls input, .controls select { font: 1.05rem var(--serif); color: var(--ink); background: #fffaf2; border: 1px solid var(--taupe); border-radius: 99px; padding: 6px 14px; }
+.controls input { flex: 1; min-width: 150px; }
+.opinion { margin: 0 0 8px; font: 700 1.2rem/1.2 var(--hand); color: var(--ink-soft); }
+.evo { margin-bottom: 8px; } .evo summary { cursor: pointer; font: .95rem var(--caps); letter-spacing: .06em; color: var(--lav); }
+.spark { width: 100%; max-width: 260px; display: block; margin: 6px 0; }
+.spark line { stroke: var(--taupe); stroke-dasharray: 3 3; } .spark path { fill: none; stroke: var(--lav); stroke-width: 2.5; stroke-linejoin: round; } .spark circle { fill: var(--paper); stroke: var(--lav); stroke-width: 2; }
+.evo ol { margin: 0; padding-left: 1.1em; font-size: 1.02rem; } .evo li { margin-bottom: 3px; }
+.bd { font: .85rem var(--caps); padding: 0 6px; border-radius: 99px; background: var(--paper); border: 1px solid var(--taupe); }
+.rel.hl { animation: flash 1.6s ease; }
+@keyframes flash { 0%, 100% { box-shadow: 0 2px 8px rgba(60,40,25,.12); } 30% { box-shadow: 0 0 0 4px var(--lime), 0 2px 12px rgba(60,40,25,.3); } }
