@@ -216,15 +216,16 @@
     if (!session) {
       return card(`<h1>Carnet de Cigale</h1><p>Réservé aux auteurs du carnet. Connecte-toi avec ton compte Discord.</p>
         <button class="discord" id="login">Se connecter avec Discord</button>`), $('#login').onclick = () =>
-        sb.auth.signInWithOAuth({ provider: 'discord', options: { redirectTo: location.origin + location.pathname } });
+        sb.auth.signInWithOAuth({ provider: 'discord', options: { redirectTo: location.origin + location.pathname, queryParams: { prompt: 'consent' } } });
     }
     const { data: ok, error } = await sb.rpc('is_admin');
     const name = session.user.user_metadata?.full_name || session.user.user_metadata?.name || session.user.email || '';
+    const did = session.user.identities?.find(i => i.provider === 'discord')?.id || session.user.user_metadata?.provider_id || '?';
     if (error || !ok) {
-      card(`<h1>Accès refusé</h1><p>Le compte Discord <b>${name.replace(/[<>&]/g, '')}</b> n'est pas autorisé à modifier ce site.${error ? '<br><small>' + error.message.replace(/[<>&]/g, '') + '</small>' : ''}</p><button id="out">Changer de compte</button>`);
+      card(`<h1>Accès refusé</h1><p>Le compte Discord <b>${name.replace(/[<>&]/g, '')}</b> (identifiant Discord <code>${String(did).replace(/[<>&]/g, '')}</code>) n'est pas autorisé à modifier ce site. Si ce n'est pas le bon compte, déconnecte-toi de Discord dans ton navigateur ou clique sur « Changer de compte ».${error ? '<br><small>' + error.message.replace(/[<>&]/g, '') + '</small>' : ''}</p><button id="out">Changer de compte</button>`);
       return $('#out').onclick = async () => { await sb.auth.signOut(); location.reload(); };
     }
-    gate.hidden = true; $('#app').hidden = false; $('#who').textContent = 'Connecté : ' + name;
+    gate.hidden = true; $('#app').hidden = false; $('#who').textContent = 'Connecté : ' + name + ' (' + did + ')';
     $('#logout').onclick = async () => { await sb.auth.signOut(); location.reload(); };
     $('#seed').onclick = importSeed;
     nav(0);
